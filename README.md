@@ -19,7 +19,10 @@ The data from chromosome 1 is loaded automatically, but can be changed in the se
 The up-and-running app will initially look something like this:
 ![image](./images/screen1.png)
 	
-You can zoom in on a region of the genome by dragging a box and double clicking within it.  All three era panels update regardless of which panel you dragged the box across.  Find an interesting LD block or go to a position of interest and single-click on it.  A heatmap showing the different haplotype sequences will appear.  (You may have to scroll down to see it.)  You can check the exact coordinates you are viewing in the gray box at the very bottom of the page that shows all LD block information.
+You can zoom in on a region of the genome by dragging a box and double clicking within it.  All three era panels update regardless of which panel you dragged the box across.  Find an interesting LD block or go to a position of interest and single-click on it.  A heatmap showing the different haplotype sequences will appear.  (You may have to scroll down to see it.):
+![image](./images/screen2.png)
+
+You can check the exact coordinates you are viewing in the gray box at the very bottom of the page that shows all LD block information.
 
 If you want to download the SNP/sample matrix for the LD block you've selected, click the first bar above the raw block information.  
 
