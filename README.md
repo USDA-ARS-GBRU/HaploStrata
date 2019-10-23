@@ -24,9 +24,7 @@ You can zoom in on a region of the genome by dragging a box and double clicking 
 
 You can check the exact coordinates you are viewing in the gray box at the very bottom of the page that shows all LD block information.
 
-If you want to download the SNP/sample matrix for the LD block you've selected, click the first bar above the raw block information.  
-
-If you want to download sample/variety information and the haplotype calls per each sample, click the second bar.
+If you want to download the SNP/sample matrix for the LD block you've selected, click the first bar above the raw block information.  Samples for US rice use an internal ID.  You can connect these IDs with more common variety names and other information (as well as sample-specific haplotypes for the defined blocks) using the file downloaded with the second bar.
 
 ## Citation:
 coming soon
