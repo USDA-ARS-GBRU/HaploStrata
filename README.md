@@ -9,9 +9,9 @@ Default data is from US rice breeding over the last century (Vaughn et al. 2020)
 This app is designed to be run under RStudio as a Shiny app.  
 
 0. Install dependancies: [RStudio](https://www.rstudio.com/products/rstudio/download/) then, using Rstudio package manager, install ggplot2 and shiny libraries if not already installed.
-1. Download the R code using "Clone or download" button; "Download ZIP"
+1. Download this repository using "Clone or download" button; "Download ZIP"
 2. Unzip the file in the location of your choice
-3. Open haplotypeExplorer.R in RStudio
+3. Open haploStrata.R in RStudio
 4. Press "Run App" button
 
 ## Exploring haplotypes
