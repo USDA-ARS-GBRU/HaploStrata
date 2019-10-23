@@ -1,5 +1,6 @@
 # HaploStrata: US Rice
 An app for examining haplotype structure through time.
+
 It's simple . . . just four dimensional genomic geology.
 Default data is from US rice breeding over the last century (Vaughn et al. 2020).   
 
