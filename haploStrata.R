@@ -162,7 +162,8 @@ server <- function(input, output) {
     content = function(con) {
       d <- dfChrom()
       d <- d[which(focalPoint$pos < d$stop & focalPoint$pos >d$start),]
-      id = d$id[1] #all ids should be same
+      id = as.character(d$id[1]) #all ids should be same
+      id = paste("X",id,sep="")
       var = read.delim("data/varietyLookup.txt")
       selectedLDBlk_order1st_code2nd = var[,id]
       new = cbind(var[,1:7], selectedLDBlk_order1st_code2nd)
