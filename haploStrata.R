@@ -49,7 +49,7 @@ ui <- fluidPage(
       h4("Select a window within any panel and zoom by double-clicking it (all panels will adjust accordingly) | Double click outside box (or with no box) to return to full view | Single click to show individual LD block details below"),
       # Output: Data file ----
       plotOutput(outputId = "plot01", width = "1200px", height = "600px",dblclick = "plot01_dblclick",click="plot01_click",brush = brushOpts(id = "plot01_brush",resetOnNew = TRUE)),
-      h5("Heatmap showing similiarity of haplotypes.  The column labels match the haplotypes above (see key at far right)"),
+      h5("Heatmap showing similiarity of haplotypes.  The column labels match the haplotypes above (see key at far right).  If fewer haplotypes are shown in heatmap than present in strata above, there are likely to be additional haplotypes at this locus that are poorly-genotyped.  Consult export tables."),
       plotOutput(outputId = "plot02", width = "1200px", height = "300px",dblclick = "plot02_dblclick",click="plot02_click",brush = brushOpts(id = "plot02_brush",resetOnNew = TRUE)),
       tags$head(tags$style(HTML("#info{font-size: 10px;}"))),
       downloadButton("button2",label="export the SNP matrix (in hapmap format) for the selected LD block (shown in heatmap and defined below)",class="butt2"), tags$head(tags$style(".butt2{background-color:black;} .butt2{color: white;} .butt2{font-style: italic;} .butt2{font-size:100%}")),
@@ -147,15 +147,16 @@ server <- function(input, output) {
       id = d$id[1] #all ids should be same
       snps = read.delim("data/common.nohet.thin3k.hmp.txt")
       snps = snps[which(snps$chrom == d$chr[1]),]
-      snps = snps[which(snps$pos < d$stop[1] & snps$pos > d$start[1]),]
+      snps = snps[which(snps$pos <= d$stop[1] & snps$pos >= d$start[1]),]
       write.table(snps,con,sep='\t',row.names=FALSE,col.names=TRUE,quote=FALSE)
     }
   )
   
+  #broken
   output$button3 <- downloadHandler(
     filename = function() {
       d <- dfChrom()
-      d <- d[which(focalPoint$pos < d$stop & focalPoint$pos >d$start),]
+      d <- d[which(focalPoint$pos < d$stop & focalPoint$pos > d$start),]
       id = d$id[1] #all ids should be same
       paste('haplotypeAndVarInfo_', id, '.txt', sep='')
     },
@@ -163,10 +164,12 @@ server <- function(input, output) {
       d <- dfChrom()
       d <- d[which(focalPoint$pos < d$stop & focalPoint$pos >d$start),]
       id = as.character(d$id[1]) #all ids should be same
-      id = paste("X",id,sep="")
+      #id = paste("X",id,sep="") for old accession type
       var = read.delim("data/varietyLookup.txt")
-      selectedLDBlk_order1st_code2nd = var[,id]
-      new = cbind(var[,1:7], selectedLDBlk_order1st_code2nd)
+      HaplotypeOrderCode = as.character(var[,id])
+      HaplotypeOrderCode = gsub(":\\d", "", HaplotypeOrderCode)
+      new = cbind(var[,1:7], HaplotypeOrderCode)
+      #new = cbind(var[,1:7], selectedLDBlk_order1st_code2nd)
       write.table(new,con,sep='\t',row.names=FALSE,col.names=TRUE,quote=FALSE)
     }
   )
@@ -175,6 +178,8 @@ server <- function(input, output) {
   output$contents <- renderPrint({
     d <- dfChrom()
     d <- d[which(focalPoint$pos < d$stop & focalPoint$pos >d$start),]
+    d = subset(d, select = -c(allele))
+    colnames(d)[colnames(d)=="order"] <- "allele_Ordered"
     d
     #focalPoint$order
     #head(brushedPoints(dfChrom(), input$plot01_brush, allRows = TRUE))
