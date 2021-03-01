@@ -4,6 +4,8 @@ Default data is from US rice breeding over the last century (Vaughn et al. 2020)
 
 ## Installation and Implementation:
 
+[HaploStrata can now be run directly as a web app with the US rice data pre-loaded](https://gbru-ars.shinyapps.io/HaploStrata/)
+
 This app is designed to be run under RStudio as a Shiny app.  
 
 0. Install dependancies: [RStudio](https://www.rstudio.com/products/rstudio/download/) then, using Rstudio package manager, install ggplot2 and shiny libraries if not already installed.
